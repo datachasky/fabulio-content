@@ -1,45 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Storie di Fabulio</title>
+    <!-- Importiamo un font amichevole, arrotondato e moderno -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f4fbfd;
+            --text-main: #2c3e50;
+            --fabulio-primary: #ff7675;
+            --fabulio-secondary: #74b9ff;
+            --fabulio-accent: #ffeaa7;
+            --card-1: #ffb8b8;
+            --card-2: #c7ecee;
+            --card-3: #badc58;
+            --card-4: #e056fd;
+            --btn-color: #0984e3;
+        }
 
-<script>
-        // ==========================================
-        // CONFIGURAZIONE DELLE STORIE FABULIO
-        // ==========================================
-        const cartellaAudio = "media/"; // Aggiornato come da tua immagine
-        const estensione = ".m4a";      // Aggiornato come da tua immagine
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        const storie = [
-            { id: "BrunoLOrsettoArrabbiato", titolo: "Bruno L'Orsetto Arrabbiato" },
-            { id: "CariAmiciAiuto", titolo: "Cari Amici Aiuto" },
-            { id: "CassandraLaStellaBrillante", titolo: "Cassandra La Stella Brillante" },
-            { id: "GhiaccioloELaPrimavera", titolo: "Ghiacciolo E La Primavera" },
-            { id: "IlFantasmaSolitario", titolo: "Il Fantasma Solitario" },
-            { id: "IlGufoELaVolpe", titolo: "Il Gufo E La Volpe" },
-            { id: "IlMioAmicoDelfino", titolo: "Il Mio Amico Delfino" },
-            { id: "LaCenaSpeciale", titolo: "La Cena Speciale" },
-            { id: "LaMagiaDeiColori", titolo: "La Magia Dei Colori" },
-            { id: "LaSecondaOccasione", titolo: "La Seconda Occasione" },
-            { id: "LOmbrelloMagico", titolo: "L'Ombrello Magico" },
-            { id: "LunioneFaLaForza", titolo: "L'Unione Fa La Forza" },
-            { id: "MartinaConLeScarpetteRotte", titolo: "Martina Con Le Scarpette Rotte" },
-            { id: "NeveEAmicizia", titolo: "Neve E Amicizia" }
-        ];
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#74b9ff 0.5px, transparent 0.5px), radial-gradient(#74b9ff 0.5px, #f4fbfd 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+        }
 
-        const grid = document.getElementById('storyGrid');
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-        storie.forEach(storia => {
-            const card = document.createElement('div');
-            card.className = 'story-card';
+        /* --- HEADER --- */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, var(--fabulio-primary), var(--fabulio-secondary));
+            color: white;
+            border-radius: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 15px 25px rgba(116, 185, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '✨';
+            position: absolute;
+            font-size: 6em;
+            opacity: 0.2;
+            top: -20px;
+            left: 20px;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        header p {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: var(--fabulio-accent);
+        }
+
+        /* --- GRID E CARDS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px 20px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+            border: 4px solid transparent;
+        }
+
+        /* Colori dinamici per le card */
+        .card:nth-child(4n+1) { border-color: var(--card-1); }
+        .card:nth-child(4n+2) { border-color: var(--card-2); }
+        .card:nth-child(4n+3) { border-color: var(--card-3); }
+        .card:nth-child(4n+4) { border-color: var(--card-4); }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+        }
+
+        .card:hover .play-btn {
+            background-color: var(--fabulio-primary);
+            transform: scale(1.1);
+        }
+
+        .icon {
+            font-size: 4.5em;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+        }
+
+        .file-name {
+            font-size: 1.6em;
+            font-weight: 900;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .file-desc {
+            font-size: 1em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .play-btn {
+            background-color: var(--btn-color);
+            color: white;
+            font-weight: 700;
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: #7f8c8d;
+            font-size: 1em;
+            font-weight: 700;
+            border-top: 2px dashed #dfe6e9;
+        }
+
+        footer span.datachasky {
+            color: var(--btn-color);
+            font-weight: 900;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2.5em; }
+            header p { font-size: 1.2em; }
+            .icon { font-size: 3.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Il Mondo di Fabulio</h1>
+            <p>Scegli una storia, premi play e inizia a sognare! ✨</p>
+        </header>
+
+        <main class="grid">
+            <!-- Streaming Link 1 -->
+            <a href="/stream/la-volpe-curiosa" class="card">
+                <div class="icon">🦊</div>
+                <div class="file-name">La Volpe Curiosa</div>
+                <div class="file-desc">Un'avventura nel bosco incantato.</div>
+                <div class="play-btn">▶️ Ascolta ora</div>
+            </a>
+
+            <!-- Streaming Link 2 -->
+            <a href="/stream/il-drago-timido" class="card">
+                <div class="icon">🐉</div>
+                <div class="file-name">Il Drago Timido</div>
+                <div class="file-desc">Chi ha detto che i draghi fanno paura?</div>
+                <div class="play-btn">▶️ Ascolta ora</div>
+            </a>
+
+            <!-- Streaming Link 3 -->
+            <a href="/stream/astronave-di-cartone" class="card">
+                <div class="icon">🚀</div>
+                <div class="file-name">Astronave di Cartone</div>
+                <div class="file-desc">Viaggio verso le stelle della fantasia.</div>
+                <div class="play-btn">▶️ Ascolta ora</div>
+            </a>
+
+            <!-- Streaming Link 4 -->
+            <a href="/stream/il-tesoro-nascosto" class="card">
+                <div class="icon">💎</div>
+                <div class="file-name">Il Tesoro Nascosto</div>
+                <div class="file-desc">Una mappa, un pirata e tanto mistero.</div>
+                <div class="play-btn">▶️ Ascolta ora</div>
+            </a>
             
-            const audioPath = `${cartellaAudio}${storia.id}${estensione}`;
+            <!-- Streaming Link 5 -->
+            <a href="/stream/magia-dautunno" class="card">
+                <div class="icon">🍁</div>
+                <div class="file-name">Magia d'Autunno</div>
+                <div class="file-desc">I segreti delle foglie che danzano.</div>
+                <div class="play-btn">▶️ Ascolta ora</div>
+            </a>
+        </main>
 
-            // Nota: per i file .m4a il type corretto è audio/mp4 o audio/x-m4a
-            card.innerHTML = `
-                <h3 class="story-title">📖 ${storia.titolo}</h3>
-                <audio controls preload="none">
-                    <source src="${audioPath}" type="audio/mp4">
-                    Il tuo browser non supporta l'audio.
-                </audio>
-            `;
-            
-            grid.appendChild(card);
-        });
-    </script>
+        <footer>
+            <p>📚 Storie inventate e raccontate da <strong>Fabulio</strong></p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Sviluppato con 🚀 da <span class="datachasky">DataChasky</span></p>
+        </footer>
+    </div>
+
+</body>
+</html>
