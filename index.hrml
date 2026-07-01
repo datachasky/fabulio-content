@@ -1,0 +1,45 @@
+
+<script>
+        // ==========================================
+        // CONFIGURAZIONE DELLE STORIE FABULIO
+        // ==========================================
+        const cartellaAudio = "media/"; // Aggiornato come da tua immagine
+        const estensione = ".m4a";      // Aggiornato come da tua immagine
+
+        const storie = [
+            { id: "BrunoLOrsettoArrabbiato", titolo: "Bruno L'Orsetto Arrabbiato" },
+            { id: "CariAmiciAiuto", titolo: "Cari Amici Aiuto" },
+            { id: "CassandraLaStellaBrillante", titolo: "Cassandra La Stella Brillante" },
+            { id: "GhiaccioloELaPrimavera", titolo: "Ghiacciolo E La Primavera" },
+            { id: "IlFantasmaSolitario", titolo: "Il Fantasma Solitario" },
+            { id: "IlGufoELaVolpe", titolo: "Il Gufo E La Volpe" },
+            { id: "IlMioAmicoDelfino", titolo: "Il Mio Amico Delfino" },
+            { id: "LaCenaSpeciale", titolo: "La Cena Speciale" },
+            { id: "LaMagiaDeiColori", titolo: "La Magia Dei Colori" },
+            { id: "LaSecondaOccasione", titolo: "La Seconda Occasione" },
+            { id: "LOmbrelloMagico", titolo: "L'Ombrello Magico" },
+            { id: "LunioneFaLaForza", titolo: "L'Unione Fa La Forza" },
+            { id: "MartinaConLeScarpetteRotte", titolo: "Martina Con Le Scarpette Rotte" },
+            { id: "NeveEAmicizia", titolo: "Neve E Amicizia" }
+        ];
+
+        const grid = document.getElementById('storyGrid');
+
+        storie.forEach(storia => {
+            const card = document.createElement('div');
+            card.className = 'story-card';
+            
+            const audioPath = `${cartellaAudio}${storia.id}${estensione}`;
+
+            // Nota: per i file .m4a il type corretto è audio/mp4 o audio/x-m4a
+            card.innerHTML = `
+                <h3 class="story-title">📖 ${storia.titolo}</h3>
+                <audio controls preload="none">
+                    <source src="${audioPath}" type="audio/mp4">
+                    Il tuo browser non supporta l'audio.
+                </audio>
+            `;
+            
+            grid.appendChild(card);
+        });
+    </script>
